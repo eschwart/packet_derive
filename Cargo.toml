@@ -2,7 +2,10 @@
 name = "packet_derive"
 version = "0.1.1"
 edition = "2021"
+licence = "MIT"
+authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
 description = "Derive implementation for packet_enum"
+exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
 
 [lib]
 proc-macro = true
