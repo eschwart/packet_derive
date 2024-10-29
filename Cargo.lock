@@ -10,7 +10,7 @@ checksum = "b048fb63fd8b5923fc5aa7b340d8e156aec7ec02f0c78fa8a6ddc2613f6f71de"
 
 [[package]]
 name = "packet_derive"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "packet_util",
  "quote",
@@ -19,9 +19,9 @@ dependencies = [
 
 [[package]]
 name = "packet_util"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "21c6e7a7faeb703805e63b19b34fd1d3949fb51f8ccf52de63bc7df1ed308ac0"
+checksum = "a56a6ec0d75019afdab0580c7e41a4521b3db5d25845fce2106d3328c1d8f23d"
 dependencies = [
  "bitflags",
  "serde",
