@@ -1,6 +1,6 @@
 [package]
 name = "packet_derive"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 license = "MIT"
 authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
@@ -11,6 +11,10 @@ exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
 proc-macro = true
 
 [dependencies]
-packet_util = "0.1.1"
+packet_util = "0.1.2"
 quote = "1.0.37"
 syn = "2.0.85"
+
+[profile.release]
+lto = true
+codegen-units = 1
