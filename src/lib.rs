@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, Data, DeriveInput, Fields};
+use syn::{Data, DeriveInput, Fields, parse_macro_input};
 
 #[proc_macro_derive(PacketEnum)]
 pub fn into_packet(input: TokenStream) -> TokenStream {
@@ -15,20 +15,15 @@ pub fn into_packet(input: TokenStream) -> TokenStream {
         // Return empty if not an enum
     };
 
-    let n = variants.len();
-
-    let size = if n <= 8 {
-        quote! { u8 }
-    } else if n <= 16 {
-        quote! { u16 }
-    } else if n <= 32 {
-        quote! { u32 }
-    } else if n <= 64 {
-        quote! { u64 }
-    } else if n <= 128 {
-        quote! { u128 }
-    } else {
-        return quote! { compile_error!("Enum has too many variants."); }.into();
+    // size of the bitflag
+    let size = match variants.len() {
+        0 => return quote! {}.into(),
+        1..=8 => quote! { u8 },
+        9..=16 => quote! { u16 },
+        17..=32 => quote! { u32 },
+        33..=64 => quote! { u64 },
+        65..=128 => quote! { u128 },
+        _ => return quote! { compile_error!("Enum has too many variants."); }.into(),
     };
 
     let old_enum_name = input.ident;
@@ -65,10 +60,7 @@ pub fn into_packet(input: TokenStream) -> TokenStream {
         }
     });
 
-    let doc_comment = format!(
-        "Automatically generated bitflags for [`{}`].",
-        old_enum_name
-    );
+    let doc_comment = format!("Automatically generated bitflags for [`{old_enum_name}`].",);
 
     let new_enum = quote! {
         ::bitflags::bitflags! {

@@ -1,9 +1,9 @@
 [package]
 name = "packet_derive"
-version = "0.1.6"
-edition = "2021"
+version = "0.1.7"
+edition = "2024"
 license = "MIT"
-authors = ["Evan Schwartzentruber <evandotschwartzentruber@gmail.com>"]
+authors = ["Evan Schwartzentruber <ejsch03@gmail.com>"]
 description = "Derive implementation for packet_enum"
 exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
 
@@ -11,9 +11,12 @@ exclude = [".github/", ".gitignore", "LICENSE", "README.md", "tests/"]
 proc-macro = true
 
 [dependencies]
-packet_util = "0.1.6"
-quote = "1.0.37"
-syn = "2.0.85"
+
+bitflags = "2.9.1"
+packet_util = "0.1.7"
+quote = "1.0.40"
+serde = { version = "1.0.219", features = ["derive"] }
+syn = "2.0.104"
 
 [profile.release]
 lto = true
